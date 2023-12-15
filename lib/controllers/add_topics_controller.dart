@@ -13,6 +13,8 @@ class AddTopicController extends GetxController {
 
   List<File> _images = [];
 
+  
+
 
   
 }
