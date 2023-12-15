@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "469354867426",
+    "project_id": "bbselearning",
+    "storage_bucket": "bbselearning.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:469354867426:android:e663c276b93a21734b8cbb",
+        "android_client_info": {
+          "package_name": "com.shisaitcompany.bbselearning"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnK16OGDVa_Svke4zTazCArsS9IRVtmYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
