@@ -1,13 +1,31 @@
 import 'package:bbselearning/constants.dart';
 import 'package:bbselearning/controllers/questionpapers_controller.dart';
 import 'package:bbselearning/views/screens/mainscreen/detailspage.dart';
+import 'package:bbselearning/views/screens/mainscreen/noticedetailspage%20.dart';
 import 'package:bbselearning/views/screens/processing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  QuestionPapersController questioncontroller =
+      Get.put(QuestionPapersController());
+
+  @override
+  void initState() {
+    super.initState();
+    questioncontroller.getLength("accounting");
+    questioncontroller.getLength("economics");
+    questioncontroller.getLength("management");
+    questioncontroller.getLength("compulsory");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,12 +152,12 @@ class HomeScreen extends StatelessWidget {
               ),
               trailing: InkWell(
                 onTap: () {},
-                child: Text(
+                child: const Text(
                   "See all",
                   style: TextStyle(
                     fontFamily: "Inter",
                     fontSize: 14,
-                    color: const Color(0xff4D8AF0),
+                    color: Color(0xff4D8AF0),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -363,7 +381,7 @@ class HomeScreen extends StatelessWidget {
                           onTap: () {
                             Get.to(const BookDetailsScreen(),
                                 transition: Transition.rightToLeft,
-                                arguments: "Bangla 2nd");
+                                arguments: "Compulsory");
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -424,7 +442,10 @@ class HomeScreen extends StatelessWidget {
                           ],
                         ),
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(const NoticeListScreen(),
+                                transition: Transition.rightToLeft);
+                          },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                             child: Column(

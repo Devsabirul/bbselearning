@@ -25,7 +25,7 @@ class TextFormFieldWidget extends StatelessWidget {
       style: const TextStyle(
         fontFamily: "Metropolis",
         color: textLightColor,
-        fontSize: 20,
+        fontSize: 16,
       ),
       decoration: InputDecoration(
         errorMaxLines: 1,

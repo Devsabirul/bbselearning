@@ -11,6 +11,7 @@ class QuestionPapersController extends GetxController {
   RxInt noticboardLength = 0.obs;
   RxInt blogsLength = 0.obs;
   RxInt teachersLength = 0.obs;
+  RxInt topicslength = 0.obs;
 
   List<QuestionPapersModel> questionPapersList = [];
 
@@ -59,6 +60,12 @@ class QuestionPapersController extends GetxController {
     }
   }
 
+  Future<void> topicsLength() async {
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('questionpapers').get();
+    topicslength.value = querySnapshot.docs.length;
+  }
+
   Future<void> getLength(String category) async {
     try {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
@@ -72,10 +79,9 @@ class QuestionPapersController extends GetxController {
         questionEconomicLength.value = querySnapshot.docs.length;
       } else if (category == "management") {
         questionManageLength.value = querySnapshot.docs.length;
-      } else if (category == "bangla 2nd") {
+      } else if (category == "compulsory") {
         questionBanglaLength.value = querySnapshot.docs.length;
       }
-      print(questionACLength);
     } catch (e) {
       return null;
     }

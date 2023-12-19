@@ -25,7 +25,8 @@ class _SplashScreenState extends State<SplashScreen> {
     questioncontroller.getLength("accounting");
     questioncontroller.getLength("economics");
     questioncontroller.getLength("management");
-    questioncontroller.getLength("bangla 2nd");
+    questioncontroller.getLength("compulsory");
+    questioncontroller.topicsLength();
   }
 
   @override

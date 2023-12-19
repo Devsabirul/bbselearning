@@ -1,11 +1,14 @@
 import 'package:bbselearning/constants.dart';
 import 'package:bbselearning/controllers/auth_controller.dart';
+import 'package:bbselearning/controllers/questionpapers_controller.dart';
 import 'package:bbselearning/views/screens/dashboard/addinfo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 final AuthController _authController = Get.put(AuthController());
+final QuestionPapersController questioncontroller =
+    Get.put(QuestionPapersController());
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -15,10 +18,14 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  QuestionPapersController questioncontroller =
+      Get.put(QuestionPapersController());
+
   @override
   void initState() {
     super.initState();
     _authController.saveLoginInfo();
+    questioncontroller.topicsLength();
   }
 
   @override
@@ -68,42 +75,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   "assets/images/appbarbg.png",
                   alignment: Alignment.topLeft,
                 ),
-
-                // SizedBox(
-                //   width: Get.width,
-                //   height: 180,
-                //   child: const Padding(
-                //     padding: EdgeInsets.symmetric(horizontal: 20),
-                //     child: Center(
-                //       child: ListTile(
-                //         leading: CircleAvatar(
-                //           backgroundImage: NetworkImage(
-                //               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOWZM4LaEBG5h5ux83IEllVR4Y1vRwsWtLdA&usqp=CAU'),
-                //           maxRadius: 35,
-                //           backgroundColor: Colors.grey,
-                //         ),
-                //         title: Text(
-                //           "Hi Admin.",
-                //           style: TextStyle(
-                //             fontFamily: "Inter",
-                //             color: Colors.white,
-                //             fontWeight: FontWeight.w500,
-                //             fontSize: 20,
-                //           ),
-                //         ),
-                //         subtitle: Text(
-                //           "BBS group controller",
-                //           style: TextStyle(
-                //             fontFamily: "Inter",
-                //             color: Color.fromARGB(255, 214, 214, 214),
-                //             fontSize: 15,
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 5, vertical: 25),
@@ -115,20 +86,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            Text(
-                              "85",
-                              style: TextStyle(
-                                fontFamily: "Inter",
-                                fontWeight: FontWeight.w700,
-                                fontSize: 16,
-                                color: Colors.white,
+                          children: [
+                            Obx(
+                              () => Text(
+                                "${questioncontroller.blogsLength}",
+                                style: const TextStyle(
+                                  fontFamily: "Inter",
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 2,
                             ),
-                            Text(
+                            const Text(
                               "Total Blogs",
                               style: TextStyle(
                                 fontFamily: "Inter",
@@ -146,20 +119,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            Text(
-                              "70",
-                              style: TextStyle(
-                                fontFamily: "Inter",
-                                fontWeight: FontWeight.w700,
-                                fontSize: 16,
-                                color: Colors.white,
+                          children: [
+                            Obx(
+                              () => Text(
+                                "${questioncontroller.noticboardLength}",
+                                style: const TextStyle(
+                                  fontFamily: "Inter",
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 2,
                             ),
-                            Text(
+                            const Text(
                               "Total Notice",
                               style: TextStyle(
                                 fontFamily: "Inter",
@@ -177,20 +152,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            Text(
-                              "10",
-                              style: TextStyle(
-                                fontFamily: "Inter",
-                                fontWeight: FontWeight.w700,
-                                fontSize: 16,
-                                color: Colors.white,
+                          children: [
+                            Obx(
+                              () => Text(
+                                "${questioncontroller.teachersLength}",
+                                style: const TextStyle(
+                                  fontFamily: "Inter",
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 2,
                             ),
-                            Text(
+                            const Text(
                               "Total Teachers",
                               style: TextStyle(
                                 fontFamily: "Inter",
@@ -208,14 +185,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            Text(
-                              "50",
-                              style: TextStyle(
-                                fontFamily: "Inter",
-                                fontWeight: FontWeight.w700,
-                                fontSize: 16,
-                                color: Colors.white,
+                          children: [
+                            Obx(
+                              () => Text(
+                                "${questioncontroller.topicslength}",
+                                style: TextStyle(
+                                  fontFamily: "Inter",
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                             SizedBox(

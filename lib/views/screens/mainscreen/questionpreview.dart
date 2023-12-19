@@ -38,7 +38,7 @@ class _QuestionPreviewScreenState extends State<QuestionPreviewScreen> {
                   future: questioncontroller.getQuestionPaperById(documentId),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     } else {
@@ -54,7 +54,7 @@ class _QuestionPreviewScreenState extends State<QuestionPreviewScreen> {
                                 minScale: 1,
                                 maxScale: 5,
                                 child: Image.network(
-                                  'https://www.shaalaa.com/images/university-of-pune-bcom-french-fybcom-1st-year-fybcom-2017-2018-2013-pattern_2:e3014ae48f034d12aa7aaac4ad54b9a8.jpg',
+                                  questionPaper.image!,
                                   fit: BoxFit.contain,
                                 ),
                               ),
@@ -77,7 +77,7 @@ class _QuestionPreviewScreenState extends State<QuestionPreviewScreen> {
                               ),
                               trailing: InkWell(
                                 onTap: () {
-                                  downloadimage();
+                                  downloadimage(questionPaper.image);
                                 },
                                 child: const Icon(
                                   Icons.download,
@@ -97,13 +97,12 @@ class _QuestionPreviewScreenState extends State<QuestionPreviewScreen> {
     );
   }
 
-  void downloadimage() async {
+  void downloadimage(imageurl) async {
     var time = DateTime.now().microsecondsSinceEpoch;
     var path = "/storage/emulated/0/Download/image-$time.jpg";
     var file = File(path);
-    var res = await get(Uri.parse(
-        "https://www.shaalaa.com/images/university-of-pune-bcom-french-fybcom-1st-year-fybcom-2017-2018-2013-pattern_2:e3014ae48f034d12aa7aaac4ad54b9a8.jpg"));
+    var res = await get(Uri.parse(imageurl));
     file.writeAsBytes(res.bodyBytes);
-    Get.snackbar("Downlaoding", "Download done.");
+    Get.snackbar("Downlaoding", "Download started.");
   }
 }
