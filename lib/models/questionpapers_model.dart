@@ -1,11 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class QuestionPapersModel {
   String? id;
   String? title;
   String? category;
   String? date;
-  String? image;
+  List<String> image;
   String? user;
 
   QuestionPapersModel({
@@ -13,7 +11,7 @@ class QuestionPapersModel {
     this.title,
     this.category,
     this.date,
-    this.image,
+    required this.image,
     this.user,
   });
 
@@ -23,8 +21,8 @@ class QuestionPapersModel {
       id: map['id'],
       title: map['title'],
       category: map['category'],
-      date: map['date'], // Adjust type to Timestamp
-      image: map['image'], // Adjust type to DocumentReference
+      date: map['date'],
+      image: List<String>.from(map['image']),
       user: map['user'],
     );
   }

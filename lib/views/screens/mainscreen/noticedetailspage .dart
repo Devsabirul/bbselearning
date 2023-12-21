@@ -1,6 +1,7 @@
 import 'package:bbselearning/constants.dart';
 import 'package:bbselearning/controllers/questionpapers_controller.dart';
 import 'package:bbselearning/models/questionpapers_model.dart';
+import 'package:bbselearning/views/screens/mainscreen/noticedview.dart';
 import 'package:bbselearning/views/screens/mainscreen/questionpreview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,7 +56,7 @@ class _NoticeListScreenState extends State<NoticeListScreen> {
                       document.data()! as Map<String, dynamic>;
                   return InkWell(
                     onTap: () {
-                      Get.to(const QuestionPreviewScreen(),
+                      Get.to(const NoticedViewScreen(),
                           transition: Transition.rightToLeft,
                           arguments: document.id);
                     },

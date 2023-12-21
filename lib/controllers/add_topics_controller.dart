@@ -22,16 +22,23 @@ class AddTopicController extends GetxController {
       firebase_storage.FirebaseStorage.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  List<File> _images = [];
+  List<XFile> _images = [];
   File? imagePath;
   RxString imgpath = "".obs;
 
-  Future getImage() async {
+  Future<void> getImage() async {
+    // Clear all items from the list
+    _images.clear();
+
     final ImagePicker picker = ImagePicker();
-    final image = await picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      imagePath = File(image.path);
-      imgpath.value = imagePath.toString();
+    final List<XFile> images = await picker.pickMultiImage();
+
+    if (images.isNotEmpty) {
+      for (var image in images) {
+        _images.add(image);
+      }
+    } else {
+      print("No images selected");
     }
   }
 
@@ -44,16 +51,28 @@ class AddTopicController extends GetxController {
 
   addTopic() async {
     isLoading.value = true;
+
     try {
       CollectionReference collectionReference =
           FirebaseFirestore.instance.collection('questionpapers');
-      final firebase_storage.Reference ref = firebase_storage
-          .FirebaseStorage.instance
-          .ref('/topicsimage/${DateTime.now()}.jpg');
 
-      UploadTask uploadTask = ref.putFile(imagePath!.absolute);
-      await Future.value(uploadTask);
-      var imageUrl = await ref.getDownloadURL();
+      List<String> imageUrls =
+          []; // To store download URLs of all uploaded images
+
+      for (var imageFile in _images) {
+        final firebase_storage.Reference ref =
+            firebase_storage.FirebaseStorage.instance.ref(
+                '/topicsimage/${DateTime.now()}_${_images.indexOf(imageFile)}.jpg');
+
+        UploadTask uploadTask = ref.putFile(File(imageFile.path));
+        await uploadTask;
+        var imageUrl = await ref.getDownloadURL();
+
+        imageUrls.add(imageUrl); // Collecting the download URLs
+
+        // You may add some delay here if needed
+        // await Future.delayed(Duration(seconds: 1));
+      }
 
       final user = _auth.currentUser;
 
@@ -61,7 +80,7 @@ class AddTopicController extends GetxController {
         title: title.text,
         category: selectedCategory.value.toLowerCase(),
         date: date.value.toString(),
-        image: imageUrl,
+        image: imageUrls, // Assigning the list of download URLs
         user: user?.uid.toString(),
       );
 
@@ -75,8 +94,7 @@ class AddTopicController extends GetxController {
       isLoading.value = false;
       Get.snackbar("Success", "Data added successfully");
     } catch (e) {
-      print(e);
+      isLoading.value = false;
     }
-    isLoading.value = false;
   }
 }
