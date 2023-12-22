@@ -18,9 +18,6 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
   QuestionPapersController questioncontroller =
       Get.put(QuestionPapersController());
 
-  CollectionReference users =
-      FirebaseFirestore.instance.collection('questionpapers');
-
   var category;
 
   @override
@@ -42,59 +39,6 @@ class _BookDetailsScreenState extends State<BookDetailsScreen> {
         title: Text(category),
       ),
       body: SafeArea(
-        // child: FutureBuilder(
-        //     future: questioncontroller.getquestionpapers(),
-        //     builder: (context, snapshot) {
-        //       if (!snapshot.hasData) {
-        //         return const Center(
-        //           child: CircularProgressIndicator(),
-        //         );
-        //       } else {
-        //         return Padding(
-        //           padding: const EdgeInsets.all(10),
-        //           child: ListView.builder(
-        //             itemCount: questioncontroller.questionPapersList.length,
-        //             itemBuilder: (context, index) {
-        //               return Card(
-        //                 margin: const EdgeInsets.symmetric(
-        //                     vertical: 5, horizontal: 10),
-        //                 child: InkWell(
-        //                   onTap: () {
-        //                     Get.to(const QuestionPreviewScreen(),
-        //                         transition: Transition.rightToLeft);
-        //                   },
-        //                   child: ListTile(
-        //                     contentPadding:
-        //                         const EdgeInsets.symmetric(horizontal: 12),
-        //                     title: Text(
-        //                       questioncontroller
-        //                           .questionPapersList[index].title!,
-        //                       style: TextStyle(
-        //                         color: textDarkColor,
-        //                         fontFamily: "Inter",
-        //                         fontSize: 16.sp,
-        //                       ),
-        //                     ),
-        //                     subtitle: Text(
-        //                       questioncontroller
-        //                           .questionPapersList[index].category!,
-        //                       style: const TextStyle(
-        //                         color: textLightColor,
-        //                       ),
-        //                     ),
-        //                     trailing: const Icon(
-        //                       Icons.arrow_forward_ios,
-        //                       size: 28,
-        //                     ),
-        //                   ),
-        //                 ),
-        //               );
-        //             },
-        //           ),
-        //         );
-        //       }
-        //     }),
-
         child: StreamBuilder<QuerySnapshot>(
           stream: questionpapersStrem,
           builder:

@@ -17,10 +17,8 @@ class QuestionPapersController extends GetxController {
 
   Future<List<QuestionPapersModel>?> getquestionpapers() async {
     try {
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('questionpapers')
-          .where('category', isEqualTo: category.value)
-          .get();
+      QuerySnapshot querySnapshot =
+          await FirebaseFirestore.instance.collection('questionpapers').get();
 
       if (querySnapshot.docs.isNotEmpty) {
         for (QueryDocumentSnapshot documentSnapshot in querySnapshot.docs) {
@@ -35,7 +33,6 @@ class QuestionPapersController extends GetxController {
 
       return null;
     } catch (e) {
-      print("Error: $e");
       return null;
     }
   }
@@ -55,7 +52,6 @@ class QuestionPapersController extends GetxController {
         return null;
       }
     } catch (e) {
-      print("Error fetching data: $e");
       return null;
     }
   }
@@ -64,6 +60,12 @@ class QuestionPapersController extends GetxController {
     QuerySnapshot querySnapshot =
         await FirebaseFirestore.instance.collection('questionpapers').get();
     topicslength.value = querySnapshot.docs.length;
+  }
+
+  Future<void> noticeBoard() async {
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('noticeslist').get();
+    noticboardLength.value = querySnapshot.docs.length;
   }
 
   Future<void> getLength(String category) async {
@@ -83,7 +85,7 @@ class QuestionPapersController extends GetxController {
         questionBanglaLength.value = querySnapshot.docs.length;
       }
     } catch (e) {
-      return null;
+      return;
     }
   }
 }

@@ -2,6 +2,9 @@ import 'package:bbselearning/constants.dart';
 import 'package:bbselearning/controllers/auth_controller.dart';
 import 'package:bbselearning/controllers/questionpapers_controller.dart';
 import 'package:bbselearning/views/screens/dashboard/addinfo_screen.dart';
+import 'package:bbselearning/views/screens/dashboard/addnoticeboard.dart';
+import 'package:bbselearning/views/screens/dashboard/table_screen.dart';
+import 'package:bbselearning/views/screens/mainscreen/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -32,9 +35,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         backgroundColor: primaryColor,
         toolbarHeight: 60,
+        titleSpacing: 0,
+        leading: InkWell(
+            onTap: () {
+              Get.off(const HomeScreen(), transition: Transition.fadeIn);
+            },
+            child: const Icon(
+              Icons.home,
+              size: 28,
+            )),
         title: const Text(
           "Dashboard",
           style: TextStyle(
@@ -323,7 +334,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               height: 80,
                               child: Card(
                                 child: InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.to(const AddNoticeBoardScreen(),
+                                        transition: Transition.rightToLeft);
+                                  },
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
@@ -410,7 +424,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                       Card(
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(const TableViewScreen(),
+                                transition: Transition.rightToLeft);
+                          },
                           child: ListTile(
                             leading:
                                 Image.asset("assets/images/accounting.png"),
@@ -433,7 +450,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                       Card(
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(const TableViewScreen(),
+                                transition: Transition.rightToLeft);
+                          },
                           child: ListTile(
                             leading: Image.asset("assets/images/economic.png"),
                             title: const Text(
@@ -455,7 +475,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                       Card(
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(const TableViewScreen(),
+                                transition: Transition.rightToLeft);
+                          },
                           child: ListTile(
                             leading:
                                 Image.asset("assets/images/management.png"),
@@ -478,7 +501,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                       Card(
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(const TableViewScreen(),
+                                transition: Transition.rightToLeft);
+                          },
                           child: ListTile(
                             leading: Image.asset("assets/images/bangla.png"),
                             title: const Text(
@@ -500,7 +526,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                       Card(
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(const TableViewScreen(),
+                                transition: Transition.rightToLeft);
+                          },
                           child: ListTile(
                             leading: Image.asset("assets/images/blog.png"),
                             title: const Text(

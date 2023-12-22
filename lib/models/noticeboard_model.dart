@@ -13,13 +13,13 @@ class NoticeBoardModel {
     required this.user,
   });
 
-  factory NoticeBoardModel.fromMap(Map<String, dynamic> json) {
+  factory NoticeBoardModel.fromMap(Map<String, dynamic> map) {
     return NoticeBoardModel(
-      date: json['date'],
-      descriptions: json['descriptions'],
-      image: List<String>.from(json['image']),
-      title: json['title'],
-      user: json['user'],
+      date: map['date'],
+      descriptions: map['descriptions'],
+      image: List<String>.from(map['image']),
+      title: map['title'],
+      user: map['user'],
     );
   }
 

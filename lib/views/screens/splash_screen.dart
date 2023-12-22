@@ -27,6 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     questioncontroller.getLength("management");
     questioncontroller.getLength("compulsory");
     questioncontroller.topicsLength();
+    questioncontroller.noticeBoard();
   }
 
   @override

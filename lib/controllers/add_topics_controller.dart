@@ -52,48 +52,53 @@ class AddTopicController extends GetxController {
   addTopic() async {
     isLoading.value = true;
 
-    try {
-      CollectionReference collectionReference =
-          FirebaseFirestore.instance.collection('questionpapers');
+    if (date.isNotEmpty && _images.isNotEmpty) {
+      try {
+        CollectionReference collectionReference =
+            FirebaseFirestore.instance.collection('questionpapers');
 
-      List<String> imageUrls =
-          []; // To store download URLs of all uploaded images
+        List<String> imageUrls =
+            []; // To store download URLs of all uploaded images
 
-      for (var imageFile in _images) {
-        final firebase_storage.Reference ref =
-            firebase_storage.FirebaseStorage.instance.ref(
-                '/topicsimage/${DateTime.now()}_${_images.indexOf(imageFile)}.jpg');
+        for (var imageFile in _images) {
+          final firebase_storage.Reference ref =
+              firebase_storage.FirebaseStorage.instance.ref(
+                  '/topicsimage/${DateTime.now()}_${_images.indexOf(imageFile)}.jpg');
 
-        UploadTask uploadTask = ref.putFile(File(imageFile.path));
-        await uploadTask;
-        var imageUrl = await ref.getDownloadURL();
+          UploadTask uploadTask = ref.putFile(File(imageFile.path));
+          await uploadTask;
+          var imageUrl = await ref.getDownloadURL();
 
-        imageUrls.add(imageUrl); // Collecting the download URLs
+          imageUrls.add(imageUrl); // Collecting the download URLs
 
-        // You may add some delay here if needed
-        // await Future.delayed(Duration(seconds: 1));
+          // You may add some delay here if needed
+          // await Future.delayed(Duration(seconds: 1));
+        }
+
+        final user = _auth.currentUser;
+
+        QuestionPapersModel newData = QuestionPapersModel(
+          title: title.text,
+          category: selectedCategory.value.toLowerCase(),
+          date: date.value.toString(),
+          image: imageUrls, // Assigning the list of download URLs
+          user: user?.uid.toString(),
+        );
+
+        // Convert the data model to a map
+        Map<dynamic, dynamic> data = newData.toJson();
+
+        // Add the data to Firestore
+        await collectionReference.add(data);
+
+        clearForm();
+        isLoading.value = false;
+        Get.snackbar("Success", "Data added successfully");
+      } catch (e) {
+        isLoading.value = false;
       }
-
-      final user = _auth.currentUser;
-
-      QuestionPapersModel newData = QuestionPapersModel(
-        title: title.text,
-        category: selectedCategory.value.toLowerCase(),
-        date: date.value.toString(),
-        image: imageUrls, // Assigning the list of download URLs
-        user: user?.uid.toString(),
-      );
-
-      // Convert the data model to a map
-      Map<dynamic, dynamic> data = newData.toJson();
-
-      // Add the data to Firestore
-      await collectionReference.add(data);
-
-      clearForm();
-      isLoading.value = false;
-      Get.snackbar("Success", "Data added successfully");
-    } catch (e) {
+    } else {
+      Get.snackbar("Errors", "All Field is Requeard ");
       isLoading.value = false;
     }
   }

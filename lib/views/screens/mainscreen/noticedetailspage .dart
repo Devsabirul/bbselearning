@@ -32,7 +32,9 @@ class _NoticeListScreenState extends State<NoticeListScreen> {
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> questionpapersStrem =
-        FirebaseFirestore.instance.collection('noticeslist').snapshots();
+        FirebaseFirestore.instance.collection('noticeslist')
+        .orderBy('date', descending: true)
+        .snapshots();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
