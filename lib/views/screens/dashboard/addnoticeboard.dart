@@ -1,5 +1,4 @@
 import 'package:bbselearning/constants.dart';
-import 'package:bbselearning/controllers/add_topics_controller.dart';
 import 'package:bbselearning/controllers/notice_controller.dart';
 import 'package:bbselearning/controllers/questionpapers_controller.dart';
 import 'package:bbselearning/views/components/text_field_widget.dart';
@@ -165,7 +164,7 @@ class _AddNoticeBoardScreenState extends State<AddNoticeBoardScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Obx(
-                              () => _addNoticecontroller.imgpath.value != ""
+                              () => _addNoticecontroller.imgpath.value
                                   ? const Text(
                                       "Image Selected",
                                       style: TextStyle(

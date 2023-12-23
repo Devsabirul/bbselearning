@@ -23,8 +23,9 @@ class AddTopicController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   List<XFile> _images = [];
+
   File? imagePath;
-  RxString imgpath = "".obs;
+  RxBool imgpath = false.obs;
 
   Future<void> getImage() async {
     // Clear all items from the list
@@ -34,6 +35,7 @@ class AddTopicController extends GetxController {
     final List<XFile> images = await picker.pickMultiImage();
 
     if (images.isNotEmpty) {
+      imgpath.value = true;
       for (var image in images) {
         _images.add(image);
       }
@@ -46,7 +48,7 @@ class AddTopicController extends GetxController {
     title.clear();
     date.value = "";
     selectedCategory.value = "Accounting";
-    imgpath.value = "";
+    imgpath.value = false;
   }
 
   addTopic() async {

@@ -22,7 +22,7 @@ class NoticeController extends GetxController {
 
   List<XFile> _images = [];
   File? imagePath;
-  RxString imgpath = "".obs;
+  RxBool imgpath = false.obs;
 
   Future<void> getImage() async {
     _images.clear();
@@ -31,6 +31,7 @@ class NoticeController extends GetxController {
     final List<XFile> images = await picker.pickMultiImage();
 
     if (images.isNotEmpty) {
+      imgpath.value = true;
       for (var image in images) {
         _images.add(image);
       }
@@ -68,7 +69,7 @@ class NoticeController extends GetxController {
   clearForm() {
     title.clear();
     date.value = "";
-    imgpath.value = "";
+    imgpath.value = false;
     descriptions.clear();
   }
 

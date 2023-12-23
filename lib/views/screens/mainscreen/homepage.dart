@@ -1,5 +1,6 @@
 import 'package:bbselearning/constants.dart';
 import 'package:bbselearning/controllers/questionpapers_controller.dart';
+import 'package:bbselearning/views/components/notification_api.dart';
 import 'package:bbselearning/views/screens/mainscreen/detailspage.dart';
 import 'package:bbselearning/views/screens/mainscreen/noticedetailspage%20.dart';
 import 'package:bbselearning/views/screens/processing_screen.dart';
@@ -17,6 +18,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   QuestionPapersController questioncontroller =
       Get.put(QuestionPapersController());
+
+  NotificationApi notificationService = NotificationApi();
 
   @override
   void initState() {

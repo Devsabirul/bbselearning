@@ -177,7 +177,7 @@ class _AddInformationScreenState extends State<AddInformationScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Obx(
-                              () => _addTopicController.imgpath.value != ""
+                              () => _addTopicController.imgpath.value
                                   ? const Text(
                                       "Image Selected",
                                       style: TextStyle(

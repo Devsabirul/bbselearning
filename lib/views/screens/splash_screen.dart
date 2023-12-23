@@ -1,6 +1,8 @@
 import 'package:bbselearning/constants.dart';
 import 'package:bbselearning/controllers/auth_controller.dart';
+import 'package:bbselearning/controllers/notification_controller.dart';
 import 'package:bbselearning/controllers/questionpapers_controller.dart';
+import 'package:bbselearning/views/components/notification_api.dart';
 import 'package:bbselearning/views/screens/mainscreen/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,10 +19,22 @@ class _SplashScreenState extends State<SplashScreen> {
   QuestionPapersController questioncontroller =
       Get.put(QuestionPapersController());
   final AuthController _authController = Get.put(AuthController());
+  final NotificationServices _notificationServices =
+      Get.put(NotificationServices());
+
+  NotificationApi notificationservice = NotificationApi();
 
   @override
   void initState() {
     super.initState();
+
+    // _notificationServices.requestNotificationPermission();
+    // _notificationServices
+    //     .getDeviceToken()
+    //     .then((value) => print("token: $value"));
+    // _notificationServices.firebaseNotificationInti();
+    // notificationservice.initialiseNotifications();
+
     _authController.getIsLoggedIn();
     questioncontroller.getLength("accounting");
     questioncontroller.getLength("economics");

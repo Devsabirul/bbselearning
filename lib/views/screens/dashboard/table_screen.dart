@@ -96,6 +96,10 @@ class _TableViewScreenState extends State<TableViewScreen> {
                                     document.data() as Map<String, dynamic>;
                                 return DataRow(
                                   cells: [
+                                    DataCell(Text(
+                                        (snapshot.data!.docs.indexOf(document) +
+                                                1)
+                                            .toString())),
                                     DataCell(
                                       Text(data['title'] ?? ''),
                                     ),
@@ -121,14 +125,23 @@ class _TableViewScreenState extends State<TableViewScreen> {
                               }));
                             }
 
-                            return DataTable(
-                              columns: const [
-                                DataColumn(label: Text('Title')),
-                                DataColumn(label: Text('Category')),
-                                DataColumn(label: Text('Action')),
-                              ],
-                              rows: rows,
-                              border: TableBorder.all(),
+                            return SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: DataTable(
+                                columns: const [
+                                  DataColumn(label: Text('S.N')),
+                                  DataColumn(
+                                    label: SizedBox(
+                                      width: 200,
+                                      child: Text('Title'),
+                                    ),
+                                  ),
+                                  DataColumn(label: Text('Category')),
+                                  DataColumn(label: Text('Action')),
+                                ],
+                                rows: rows,
+                                border: TableBorder.all(),
+                              ),
                             );
                           },
                         ),
@@ -176,6 +189,10 @@ class _TableViewScreenState extends State<TableViewScreen> {
                                   document.data() as Map<String, dynamic>;
                               return DataRow(
                                 cells: [
+                                  DataCell(Text(
+                                      (snapshot.data!.docs.indexOf(document) +
+                                              1)
+                                          .toString())),
                                   DataCell(
                                     Text(data['title'] ?? ''),
                                   ),
@@ -200,14 +217,25 @@ class _TableViewScreenState extends State<TableViewScreen> {
                               );
                             }).toList();
 
-                            return DataTable(
-                              columns: const [
-                                DataColumn(label: Text('Title')),
-                                DataColumn(label: Text('Date')),
-                                DataColumn(label: Text('Action')),
-                              ],
-                              rows: rows,
-                              border: TableBorder.all(),
+                            return SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: DataTable(
+                                columns: const [
+                                  DataColumn(label: Text('S.N')),
+                                  DataColumn(
+                                    label: SizedBox(
+                                      width: 200,
+                                      child: Text('Title'),
+                                    ),
+                                  ),
+                                  DataColumn(label: Text('Date')),
+                                  DataColumn(
+                                    label: Text('Action'),
+                                  ),
+                                ],
+                                rows: rows,
+                                border: TableBorder.all(),
+                              ),
                             );
                           },
                         ),
